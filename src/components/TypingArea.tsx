@@ -147,17 +147,21 @@ export function TypingArea({ snippet, settings, onComplete, onNext }: TypingArea
             x = rect.left - containerRect.left + container.scrollLeft;
             y = rect.top - containerRect.top + container.scrollTop;
         } else {
-            // End of line logic for fallback
-            const prevIndex = index - 1;
-            const prevSpan = container.querySelector(`[data-index="${prevIndex}"]`) as HTMLElement;
-            if (prevSpan) {
-                const rect = prevSpan.getBoundingClientRect();
-                x = rect.right - containerRect.left + container.scrollLeft;
-                y = rect.top - containerRect.top + container.scrollTop;
-            }
-        }
-        setCursorPos({ x, y });
-    };
+  // End of line logic for fallback
+  const prevIndex = Math.max(0, index - 1);
+  const prevSpan = container.querySelector(
+    `[data-index="${prevIndex}"]`
+  ) as HTMLElement | null;
+
+  if (prevSpan) {
+    const rect = prevSpan.getBoundingClientRect();
+    x = rect.right - containerRect.left + container.scrollLeft;
+    y = rect.top - containerRect.top + container.scrollTop;
+  } else {
+    x = 0;
+    y = 0;
+  }
+}
 
     // Auto-scroll
     useEffect(() => {
