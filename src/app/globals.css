@@ -1,26 +1,118 @@
 @import "tailwindcss";
 
 :root {
+  /* Light Theme (Default) */
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0d0d0d;
+
+  --muted: #f5f5f5;
+  --muted-foreground: #737373;
+
+  --primary: #171717;
+  --primary-foreground: #ffffff;
+
+  --accent: #e5e5e5;
+  --accent-foreground: #171717;
+
+  /* Syntax Highlighting Colors (Light) */
+  --sh-keyword: #d946ef;
+  --sh-function: #3b82f6;
+  --sh-string: #22c55e;
+  --sh-comment: #9ca3af;
+
+  /* Token colors (Light) */
+  --token-comment: #9ca3af;
+  --token-punctuation: #a3a3a3;
+  --token-keyword: #d946ef;
+  --token-string: #16a34a;
+  --token-function: #2563eb;
+  --token-number: #9333ea;
+
+  --cursor: #171717;
+}
+
+.dark {
+  /* Deep Dark Theme (Previous Default) */
+  --background: #0d0d0d;
+  --foreground: #ededed;
+
+  /* Cozy/Muted tones */
+  --muted: #262626;
+  --muted-foreground: #a3a3a3;
+
+  --primary: #ededed;
+  --primary-foreground: #0d0d0d;
+
+  --accent: #333333;
+  --accent-foreground: #ededed;
+
+  /* Syntax Highlighting Colors (inspired by Vesper/Monokai/Nord) */
+  --sh-keyword: #ff79c6;
+  --sh-function: #8be9fd;
+  --sh-string: #f1fa8c;
+  --sh-comment: #6272a4;
+
+  /* Token colors */
+  --token-comment: #636e7b;
+  --token-punctuation: #808080;
+  --token-keyword: #ff79c6;
+  --token-string: #f1fa8c;
+  --token-function: #8be9fd;
+  --token-number: #bd93f9;
+
+  --cursor: #f8f8f2;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  /* Semantic Colors for Editor */
+  --color-token-comment: var(--token-comment);
+  --color-token-punctuation: var(--token-punctuation);
+  --color-token-keyword: var(--token-keyword);
+  --color-token-string: var(--token-string);
+  --color-token-function: var(--token-function);
+  --color-token-number: var(--token-number);
+
+  --color-cursor: var(--cursor);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
 }
