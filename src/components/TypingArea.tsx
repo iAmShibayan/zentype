@@ -172,7 +172,7 @@ export function TypingArea({ snippet, settings, onComplete, onNext }: TypingArea
 // ✅ Auto-scroll / caret update should be OUTSIDE updateCursorPos
 useEffect(() => {
   updateCursorPos(input.length);
-}, [input, chars.length]);
+}, [input.length]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
