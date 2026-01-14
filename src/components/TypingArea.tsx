@@ -145,7 +145,7 @@ export function TypingArea({ snippet, settings, onComplete, onNext }: TypingArea
         if (activeSpan) {
             const rect = activeSpan.getBoundingClientRect();
             x = rect.left - containerRect.left + container.scrollLeft;
-            y = (rect.top - containerRect.top + container.scrollTop) + (rect.height / 2);
+            y = rect.top - containerRect.top + container.scrollTop;
         } else {
             // End of line logic for fallback
             const prevIndex = index - 1;
