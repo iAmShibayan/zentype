@@ -153,7 +153,7 @@ export function TypingArea({ snippet, settings, onComplete, onNext }: TypingArea
             if (prevSpan) {
                 const rect = prevSpan.getBoundingClientRect();
                 x = rect.right - containerRect.left + container.scrollLeft;
-                y = (rect.top - containerRect.top + container.scrollTop) + (rect.height / 2);
+                y = rect.top - containerRect.top + container.scrollTop;
             }
         }
         setCursorPos({ x, y });
