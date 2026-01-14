@@ -173,10 +173,6 @@ export function TypingArea({ snippet, settings, onComplete, onNext }: TypingArea
 useEffect(() => {
   updateCursorPos(input.length);
 }, [input, chars.length]);
-        // Scroll container to keep cursor in view?
-        // If we use traditional scroll, browser might handle input focus scroll. 
-    }, [input, chars.length]);
-
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
