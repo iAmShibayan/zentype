@@ -132,40 +132,47 @@ export function TypingArea({ snippet, settings, onComplete, onNext }: TypingArea
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [onNext]);
 
-    const updateCursorPos = (index: number) => {
-        if (!containerRef.current) return;
-        const container = containerRef.current;
-        const containerRect = container.getBoundingClientRect();
+   const updateCursorPos = (index: number) => {
+  if (!containerRef.current) return;
+  const container = containerRef.current;
+  const containerRect = container.getBoundingClientRect();
 
-        let x = 0;
-        let y = 0;
+  let x = 0;
+  let y = 0;
 
-        const activeSpan = container.querySelector(`[data-index="${index}"]`) as HTMLElement;
-
-        if (activeSpan) {
-            const rect = activeSpan.getBoundingClientRect();
-            x = rect.left - containerRect.left + container.scrollLeft;
-            y = rect.top - containerRect.top + container.scrollTop;
-        } else {
-  // End of line logic for fallback
-  const prevIndex = Math.max(0, index - 1);
-  const prevSpan = container.querySelector(
-    `[data-index="${prevIndex}"]`
+  const activeSpan = container.querySelector(
+    `[data-index="${index}"]`
   ) as HTMLElement | null;
 
-  if (prevSpan) {
-    const rect = prevSpan.getBoundingClientRect();
-    x = rect.right - containerRect.left + container.scrollLeft;
+  if (activeSpan) {
+    const rect = activeSpan.getBoundingClientRect();
+    x = rect.left - containerRect.left + container.scrollLeft;
     y = rect.top - containerRect.top + container.scrollTop;
   } else {
-    x = 0;
-    y = 0;
-  }
-}
+    // fallback to previous character end
+    const prevIndex = Math.max(0, index - 1);
+    const prevSpan = container.querySelector(
+      `[data-index="${prevIndex}"]`
+    ) as HTMLElement | null;
 
-    // Auto-scroll
-    useEffect(() => {
-        updateCursorPos(input.length);
+    if (prevSpan) {
+      const rect = prevSpan.getBoundingClientRect();
+      x = rect.right - containerRect.left + container.scrollLeft;
+      y = rect.top - containerRect.top + container.scrollTop;
+    } else {
+      x = 0;
+      y = 0;
+    }
+  }
+
+  // ✅ THIS WAS MISSING
+  setCursorPos({ x, y });
+};
+
+// ✅ Auto-scroll / caret update should be OUTSIDE updateCursorPos
+useEffect(() => {
+  updateCursorPos(input.length);
+}, [input, chars.length]);
         // Scroll container to keep cursor in view?
         // If we use traditional scroll, browser might handle input focus scroll. 
     }, [input, chars.length]);
