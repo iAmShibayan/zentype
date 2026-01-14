@@ -282,7 +282,6 @@ export function TypingArea({ snippet, settings, onComplete, onNext }: TypingArea
                                 className="absolute bg-[var(--cursor)] w-[2px] h-[1.2em] rounded-sm z-30 pointer-events-none shadow-[0_0_8px_rgba(255,255,255,0.4)]"
                                 initial={false}
                                 animate={{ x: cursorPos.x, y: cursorPos.y, opacity: isTyping ? 1 : [1, 0, 1] }}
-                                style={{ translateY: "-50%" }}
                                 transition={{
                                     x: { type: "spring", stiffness: 900, damping: 40, mass: 0.2 },
                                     y: { type: "spring", stiffness: 900, damping: 40, mass: 0.2 },
