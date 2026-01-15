@@ -285,7 +285,7 @@ export function TypingArea({ snippet, settings, onComplete, onNext }: TypingArea
             ))}
           </div>
 
-          <div ref={containerRef} className="relative flex-1 py-6 px-6 outline-none">
+          <div ref={containerRef} className="relative flex-1 py-0 px-0 outline-none">
             {/* Cursor */}
             {focused && (
               <motion.div
